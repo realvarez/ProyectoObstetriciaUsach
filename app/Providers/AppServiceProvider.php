@@ -18,15 +18,12 @@ class AppServiceProvider extends ServiceProvider
         //
     }
 
-    /**
-     * Bootstrap any application services.
-     *
-     * @return void
-     */
-    public function boot()
-    {
-        $category = new Category();
-        $all_categories = $category -> recursiveGet();
-        View::share('all_categories', $all_categories);
+    
+    public function boot(){
+        if(!defined('list_categories')){
+            $category = new Category();
+            $all_categories = $category -> recursiveGet();
+            define('list_categories', $all_categories);
+        }
     }
 }

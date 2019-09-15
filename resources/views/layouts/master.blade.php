@@ -4,7 +4,7 @@
     @include('layouts.partials.header')
 </head>
 	<body class="adminbody">
-		<div id="main">
+		<div id="main">			
 			@include('layouts.partials.topbar')
 			@include('layouts.partials.leftsidebar')
 			<div class="content-page" {{(\Request::route()->getName() == 'login' || \Request::route()->getName() == 'firstUsePassword')? 'style=margin-left:0px;':''}}>

@@ -20,8 +20,7 @@ class HomeController extends Controller
 
     public function index()
     {
-        $category = new Category();
-        $data['categories'] = $category -> recursiveGet();
+        $data['categories'] = json_decode(constant('list_categories'));
         $fav_categories = Auth::user()->favorite_categories;
         foreach ($data['categories'] as $categorie) {
             if($fav_categories->contains($categorie)){

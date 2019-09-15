@@ -28,7 +28,8 @@ class Category extends Model implements Searchable
         return $this->belongsToMany(User::class, 'user_record');
     }
 
-    public function recursiveGet($category_id = false, $categories_list = false){
+    public function recursiveGet($category_id = false, $categories_list = false)
+    {
         if(!$category_id){
             $categories = ($categories_list ?: Category::where('category_level',"=", 1)->where('state',1)->get());
             foreach($categories as $category){
@@ -43,17 +44,13 @@ class Category extends Model implements Searchable
                 $category->sons = $this->recursiveGet($category->id);
             }
         }
+
         return $categories;
     }
     public function getSearchResult(): SearchResult
     {
         $url = route('category.show', $this->id);
         $name=$this->category_name;
-
-        return new SearchResult(
-            $this,
-            $name,
-            $url
-         );
+        return new SearchResult($this, $name, url);
     }
 }
